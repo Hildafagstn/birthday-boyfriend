@@ -6,7 +6,7 @@ const config = {
     anniversaryDate: "2020-12-03", 
     
     // Nomor WhatsApp kamu (Gunakan format kode negara, misal 62812xxx)
-    whatsappNumber: "6281234567890", 
+    whatsappNumber: "6282240874643", 
     
     // Surat cinta kasual/manis bergaya tulisan tangan asli
     loveLetterText: `Hai ganteng... ❤️
