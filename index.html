@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Sayang! ❤️</title>
+    <meta name="description" content="Website ucapan ulang tahun spesial untuk pacar tersayang. Penuh kenangan dan harapan indah.">
+    <!-- Google Fonts: Caveat (Handwritten) & Quicksand (Soft Cute Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+    <!-- Background Canvas for Floating Hearts -->
+    <canvas id="heartCanvas"></canvas>
+
+    <!-- Background Video -->
+    <video id="bgVideo" autoplay muted loop playsinline>
+        <source src="background_video.mp4?v=1" type="video/mp4">
+        Browser kamu tidak mendukung video latar belakang.
+    </video>
+
+    <!-- Retro Vinyl Music Player -->
+    <div class="music-player" id="musicPlayer" title="Putar Lagu">
+        <button class="music-btn" id="musicBtn" aria-label="Play/Pause Music">
+            <!-- Vinyl Record SVG -->
+            <svg class="vinyl-icon" viewBox="0 0 24 24" width="36" height="36">
+                <circle cx="12" cy="12" r="10" fill="#1e1e1e" stroke="#fff" stroke-width="0.5"/>
+                <circle cx="12" cy="12" r="8" fill="none" stroke="#333" stroke-width="0.5"/>
+                <circle cx="12" cy="12" r="6" fill="none" stroke="#555" stroke-width="0.5"/>
+                <circle cx="12" cy="12" r="4" fill="none" stroke="#777" stroke-width="0.5"/>
+                <circle cx="12" cy="12" r="2.5" fill="#f43f5e"/>
+                <circle cx="12" cy="12" r="0.8" fill="#fff"/>
+            </svg>
+        </button>
+    </div>
+    
+    <!-- Audio Source -->
+    <audio id="bgMusic" src="reality_club_2112.m4a?v=4" loop>
+        Browser kamu tidak mendukung pemutaran musik latar.
+    </audio>
+
+    <!-- Main Viewport Container -->
+    <main class="container">
+        
+        <!-- SLIDE 1: ENVELOPE / LOCK -->
+        <section class="slide active" id="slide-1">
+            <div class="slide-content">
+                <div class="envelope-wrapper">
+                    <div class="envelope" id="envelope">
+                        <div class="flap"></div>
+                        <div class="pocket"></div>
+                        <div class="letter-preview">
+                            <div class="line"></div>
+                            <div class="line"></div>
+                            <div class="line"></div>
+                        </div>
+                        <div class="heart" id="heart-seal">❤️</div>
+                    </div>
+                </div>
+                <h1 class="scrapbook-title large glow-text">Ada surat kecil buat kamu...</h1>
+                <p class="subtitle">Buka amplop di atas ya! ✨</p>
+                <button class="btn btn-primary pulse" id="open-btn">Buka Surat 💌</button>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: THE BIRTHDAY BOY & COUNTER -->
+        <section class="slide" id="slide-2">
+            <div class="slide-content">
+                <div class="card glass">
+                    <h2 class="scrapbook-title large">Happy Birthday, Sayang!</h2>
+                    
+                    <!-- Polaroid Frame with Tape -->
+                    <div class="polaroid-container">
+                        <div class="polaroid">
+                            <div class="polaroid-img-wrapper">
+                                <img src="images/boyfriend.png" alt="Foto Pacar Ganteng" class="polaroid-img">
+                            </div>
+                            <div class="polaroid-text">The Birthday Boy 🎂</div>
+                        </div>
+                    </div>
+
+                    <p class="message-intro">Selamat bertambah umur buat pacar aku yang paling sabar dan paling ganteng sedunia. Makasih ya udah lahir ke dunia dan jadi bagian dari hidup aku.</p>
+                    
+                    <!-- Love Counter -->
+                    <div class="counter-container">
+                        <h3>Udah nemenin aku selama:</h3>
+                        <div class="counter" id="love-counter">
+                            <div class="counter-item">
+                                <span class="number" id="days">00</span>
+                                <span class="label">Hari</span>
+                            </div>
+                            <div class="counter-item">
+                                <span class="number" id="hours">00</span>
+                                <span class="label">Jam</span>
+                            </div>
+                            <div class="counter-item">
+                                <span class="number" id="minutes">00</span>
+                                <span class="label">Menit</span>
+                            </div>
+                            <div class="counter-item">
+                                <span class="number" id="seconds">00</span>
+                                <span class="label">Detik</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-secondary next-btn">Lanjut 💖</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: MEMORY GALLERY -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <div class="card glass wide">
+                    <h2 class="scrapbook-title">Momen Favorit Kita ✨</h2>
+                    <p class="subtitle">Beberapa kenangan manis yang selalu bikin aku bersyukur punya kamu...</p>
+
+                    <!-- Polaroid Gallery -->
+                    <div class="gallery">
+                        <div class="polaroid tilted tilted-left">
+                            <div class="polaroid-img-wrapper">
+                                <img src="images/couple1.png" alt="Kenangan 1" class="polaroid-img">
+                            </div>
+                            <div class="polaroid-text">First Date Kita 💕</div>
+                        </div>
+                        
+                        <div class="polaroid tilted tilted-right">
+                            <div class="polaroid-img-wrapper">
+                                <img src="images/couple2.png" alt="Kenangan 2" class="polaroid-img">
+                            </div>
+                            <div class="polaroid-text">Bahagia Terus Ya! 🔒</div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-outline back-btn">Kembali</button>
+                        <button class="btn btn-secondary next-btn">Lanjut 💖</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: LOVE LETTER -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content">
+                <div class="card glass letter-card">
+                    <h2 class="scrapbook-title">Pesan dari Hati ✍️</h2>
+                    
+                    <div class="letter-box">
+                        <div class="letter-content" id="typewriter-text">
+                            <!-- Teks akan diketik otomatis melalui JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-outline back-btn">Kembali</button>
+                        <button class="btn btn-secondary next-btn" id="letter-next-btn" style="opacity: 0; pointer-events: none; transition: opacity 0.5s;">Tiup Lilin! 🎂</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: CAKE & CELEBRATION -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <div class="card glass">
+                    <h2 class="scrapbook-title large" id="cake-title">Tiup Lilinnya! 🕯️</h2>
+                    <p class="subtitle" id="cake-subtitle">Ketuk lilin di bawah ya, terus make a wish...</p>
+
+                    <!-- Interactive Birthday Cake -->
+                    <div class="cake-container">
+                        <div class="cake">
+                            <div class="plate"></div>
+                            <div class="layer layer-bottom"></div>
+                            <div class="layer layer-middle"></div>
+                            <div class="layer layer-top"></div>
+                            <div class="icing"></div>
+                            <div class="drip drip1"></div>
+                            <div class="drip drip2"></div>
+                            <div class="drip drip3"></div>
+                            <!-- Candle -->
+                            <div class="candle" id="candle-1">
+                                <div class="flame"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Birthday Wish Text -->
+                    <div class="wish-reveal hidden" id="wish-reveal">
+                        <h3 class="scrapbook-title">Sekali lagi, Selamat Ulang Tahun sayang! 🎉</h3>
+                        <p class="personal-wish">Semoga semua hal baik selalu menyertai kamu. Aku bakal selalu ada di sini buat nemenin hari-hari kamu ke depannya. I love you so much! ❤️</p>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-outline back-btn" id="cake-back-btn">Kembali</button>
+                        <a href="#" target="_blank" class="btn btn-primary hidden pulse" id="wa-btn">Kirim Peluk Online 🤗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JS Link -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,996 @@
+/* ==========================================
+   CSS GLOBAL STYLES & RESET (SCRAPBOOK THEME)
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --paper-bg: #fffdf9;
+    --paper-border: #ebdcc9;
+    --text-main: #4a3e3d;
+    --text-muted: #8c7a78;
+    --color-accent: #cc4e5c; /* Soft Terracotta */
+    --color-accent-hover: #b33946;
+    --color-secondary: #7fa99b; /* Soft Olive Sage */
+    --washi-tape: rgba(229, 218, 203, 0.55);
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-main);
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+}
+
+/* Blurred Video Background */
+#bgVideo {
+    position: fixed;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(4px) brightness(0.7) contrast(1.05);
+}
+
+/* Background Particle Canvas */
+#heartCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ==========================================
+   TYPOGRAPHY
+   ========================================== */
+.scrapbook-title {
+    font-family: 'Caveat', cursive;
+    color: var(--color-accent);
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.4rem;
+    line-height: 1.1;
+}
+
+.scrapbook-title.large {
+    font-size: 3.2rem;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   CONTAINER & SLIDES
+   ========================================== */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.94) translateY(20px);
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1), 
+                opacity 0.6s ease;
+    z-index: 5;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+    z-index: 10;
+}
+
+.slide-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Torn Paper / Journal Card Style */
+.card {
+    width: 100%;
+    max-height: 90vh;
+    max-height: 90dvh;
+    padding: 1.8rem 1.4rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--paper-bg);
+    border: 2px solid var(--paper-border);
+    box-shadow: 0 10px 30px rgba(84, 76, 62, 0.1);
+    overflow-y: auto;
+    scrollbar-width: none;
+    position: relative;
+}
+
+.card::-webkit-scrollbar {
+    display: none;
+}
+
+/* Notebook hole punches on the left edge for journal aesthetic */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12px;
+    bottom: 0;
+    width: 2px;
+    border-left: 2px dashed rgba(140, 122, 120, 0.15);
+    pointer-events: none;
+}
+
+.card.wide {
+    max-width: 500px;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.2rem;
+    width: 100%;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: white;
+    box-shadow: 0 4px 12px rgba(204, 78, 92, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: var(--color-accent-hover);
+    box-shadow: 0 6px 15px rgba(204, 78, 92, 0.35);
+}
+
+.btn-secondary {
+    background: var(--color-secondary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(127, 169, 155, 0.2);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    background: #6c9487;
+    box-shadow: 0 6px 15px rgba(127, 169, 155, 0.35);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #ebdcc9;
+    color: var(--text-muted);
+}
+
+.btn-outline:hover {
+    background: #faf6ee;
+    border-color: #d7c5b0;
+    color: var(--text-main);
+}
+
+.pulse {
+    animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+    0% { box-shadow: 0 0 0 0 rgba(204, 78, 92, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(204, 78, 92, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(204, 78, 92, 0); }
+}
+
+/* ==========================================
+   MUSIC PLAYER (RETRO VINYL)
+   ========================================== */
+.music-player {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+}
+
+.music-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-icon {
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.music-player.playing .vinyl-icon {
+    animation: rotateVinyl 4s linear infinite;
+}
+
+@keyframes rotateVinyl {
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   SLIDE 1: ENVELOPE DESIGN (RETRO)
+   ========================================== */
+.envelope-wrapper {
+    height: 160px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.envelope {
+    position: relative;
+    width: 220px;
+    height: 132px;
+    background: #d4636f;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 8px 20px rgba(100, 80, 70, 0.12);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-5px);
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 70px solid #bf4e5b;
+    transform-origin: top;
+    transition: transform 0.4s ease 0.2s, z-index 0.2s ease 0.2s;
+    z-index: 4;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.pocket {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-left: 110px solid #e67f8a;
+    border-right: 110px solid #e67f8a;
+    border-bottom: 66px solid #d4636f;
+    border-radius: 0 0 8px 8px;
+    z-index: 3;
+}
+
+.letter-preview {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    width: 190px;
+    height: 92px;
+    background: #fffdf9;
+    border-radius: 4px;
+    border: 1px solid #ebdcc9;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 2;
+}
+
+.envelope.open .letter-preview {
+    transform: translateY(-50px);
+    z-index: 2;
+}
+
+.letter-preview .line {
+    height: 4px;
+    background: #ebdcc9;
+    border-radius: 2px;
+}
+
+.letter-preview .line:nth-child(1) { width: 75%; }
+.letter-preview .line:nth-child(2) { width: 90%; }
+.letter-preview .line:nth-child(3) { width: 45%; }
+
+.heart {
+    position: absolute;
+    top: 28px;
+    left: calc(50% - 18px);
+    width: 36px;
+    height: 36px;
+    font-size: 28px;
+    text-align: center;
+    line-height: 36px;
+    z-index: 5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: pulse 1.5s infinite;
+}
+
+.envelope.open .heart {
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* ==========================================
+   POLAROID DESIGN WITH WASHI TAPE
+   ========================================== */
+.polaroid-container {
+    position: relative;
+    padding-top: 14px; /* Ruang untuk selotip */
+    flex-shrink: 0;
+    margin-bottom: 0.8rem;
+}
+
+/* Washi Tape Effect */
+.polaroid-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(50% - 35px);
+    width: 70px;
+    height: 18px;
+    background-color: var(--washi-tape);
+    transform: rotate(-3deg);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    z-index: 15;
+    border-left: 1.5px dashed rgba(84, 73, 62, 0.12);
+    border-right: 1.5px dashed rgba(84, 73, 62, 0.12);
+    backdrop-filter: blur(1px);
+}
+
+.polaroid {
+    background: #ffffff;
+    padding: 8px;
+    padding-bottom: 16px;
+    border: 1px solid #ebdcc9;
+    box-shadow: 0 6px 18px rgba(84, 76, 62, 0.06);
+    transform: rotate(-2deg);
+    transition: all 0.3s ease;
+    width: 160px; /* Ukuran lebih kecil untuk mobile fit */
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 10px 24px rgba(84, 76, 62, 0.1);
+}
+
+.polaroid-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border: 1px solid #fcfaf6;
+    background: #f7f3eb;
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.polaroid-text {
+    font-family: 'Caveat', cursive;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+.message-intro {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+/* ==========================================
+   LOVE COUNTER
+   ========================================== */
+.counter-container {
+    background: #FAF7F0;
+    border: 1px dashed var(--paper-border);
+    border-radius: 12px;
+    padding: 8px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.counter-container h3 {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.counter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.counter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counter-item .number {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.counter-item .label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* ==========================================
+   SLIDE 3: GALLERY (POLAROID COLLAGE)
+   ========================================== */
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Diperpendek untuk layar HP */
+    margin: 0.5rem 0;
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.gallery .polaroid {
+    position: absolute;
+    width: 135px; /* Diperkecil agar pas berdampingan di HP */
+    padding: 6px;
+    padding-bottom: 12px;
+    margin-bottom: 0;
+    z-index: 10;
+}
+
+.gallery .polaroid::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 14px;
+    background-color: var(--washi-tape);
+    z-index: 15;
+    border-left: 1px dashed rgba(84, 73, 62, 0.1);
+    border-right: 1px dashed rgba(84, 73, 62, 0.1);
+    transform: rotate(1deg);
+}
+
+.gallery .polaroid:hover {
+    z-index: 20;
+    transform: scale(1.08) rotate(0deg);
+}
+
+.tilted-left {
+    transform: translate(-38px, -8px) rotate(-5deg);
+}
+
+.tilted-right {
+    transform: translate(38px, 8px) rotate(5deg);
+}
+
+/* ==========================================
+   SLIDE 4: LOVE LETTER
+   ========================================== */
+.letter-box {
+    width: 100%;
+    min-height: 180px;
+    max-height: 280px; /* Disesuaikan agar muat vertikal */
+    background: #FAF7F0;
+    border: 1px dashed var(--paper-border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.letter-content {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    white-space: pre-wrap;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+
+.letter-content::after {
+    content: '|';
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ==========================================
+   SLIDE 5: CAKE & CELEBRATION
+   ========================================== */
+.cake-container {
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.cake {
+    position: relative;
+    width: 110px;
+    height: 85px;
+}
+
+.plate {
+    position: absolute;
+    bottom: -10px;
+    left: -20px;
+    width: 150px;
+    height: 8px;
+    background: #eae0f3;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.layer {
+    position: absolute;
+    width: 90px;
+    left: 10px;
+    border-radius: 6px 6px 0 0;
+}
+
+.layer-bottom {
+    bottom: 0;
+    height: 28px;
+    background: #e6c5b8;
+}
+
+.layer-middle {
+    bottom: 24px;
+    height: 24px;
+    background: #d4a396;
+    width: 80px;
+    left: 15px;
+}
+
+.layer-top {
+    bottom: 44px;
+    height: 20px;
+    background: #b87a6d;
+    width: 72px;
+    left: 19px;
+}
+
+.icing {
+    position: absolute;
+    bottom: 60px;
+    left: 19px;
+    width: 72px;
+    height: 8px;
+    background: #f4b2b0;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.drip {
+    position: absolute;
+    background: #f4b2b0;
+    width: 6px;
+    border-radius: 0 0 3px 3px;
+    z-index: 2;
+}
+
+.drip1 { left: 26px; bottom: 53px; height: 10px; }
+.drip2 { left: 55px; bottom: 50px; height: 14px; }
+.drip3 { left: 75px; bottom: 56px; height: 7px; }
+
+/* Candle */
+.candle {
+    position: absolute;
+    bottom: 64px;
+    left: 51px;
+    width: 6px;
+    height: 22px;
+    background: linear-gradient(to right, #ffffff, #f4e8d8);
+    border-radius: 3px 3px 0 0;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.flame {
+    position: absolute;
+    top: -10px;
+    left: -2px;
+    width: 10px;
+    height: 12px;
+    background: radial-gradient(circle at bottom, #ff8200 0%, #ffea00 60%, transparent 100%);
+    border-radius: 50% 50% 20% 20%;
+    transform-origin: bottom center;
+    animation: flicker 1s ease-in-out infinite alternate;
+    box-shadow: 0 0 6px #ffea00, 0 0 12px #ff8200;
+    z-index: 4;
+}
+
+@keyframes flicker {
+    0% { transform: scale(1) rotate(-1deg); }
+    100% { transform: scale(1.1) rotate(1deg); }
+}
+
+.candle.blown .flame {
+    display: none;
+}
+
+.wish-reveal {
+    margin-top: 0.8rem;
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.wish-reveal p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+
+#wa-btn {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.15);
+}
+
+/* ==========================================
+   HEIGHT-BASED MEDIA QUERIES (OPTIMASI VERTIKAL PADA HP)
+   ========================================== */
+
+/* Tinggi Layar Standar Ponsel (Height <= 780px) */
+@media (max-height: 780px) {
+    .card {
+        padding: 1.4rem 1.1rem;
+    }
+    
+    .scrapbook-title {
+        font-size: 2.1rem;
+    }
+    
+    .scrapbook-title.large {
+        font-size: 2.6rem;
+    }
+    
+    .subtitle {
+        margin-bottom: 0.8rem;
+    }
+    
+    .polaroid {
+        width: 140px;
+        padding-bottom: 14px;
+    }
+    
+    .polaroid-text {
+        font-size: 1.4rem;
+        margin-top: 6px;
+    }
+    
+    .message-intro {
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.45;
+    }
+    
+    .counter-container {
+        padding: 6px;
+    }
+    
+    .counter-item .number {
+        font-size: 1.1rem;
+    }
+    
+    .gallery {
+        height: 170px;
+    }
+    
+    .gallery .polaroid {
+        width: 120px;
+    }
+    
+    .letter-box {
+        min-height: 150px;
+        max-height: 240px;
+        padding: 0.8rem;
+    }
+    
+    .btn-group {
+        margin-top: 1rem;
+    }
+    
+    .btn {
+        padding: 0.65rem 1.3rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Tinggi Layar Pendek Ponsel / Keyboard Aktif (Height <= 680px) */
+@media (max-height: 680px) {
+    .card {
+        padding: 1rem 0.9rem;
+    }
+    
+    .scrapbook-title {
+        font-size: 1.8rem;
+    }
+    
+    .scrapbook-title.large {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        margin-bottom: 0.6rem;
+        font-size: 0.8rem;
+    }
+    
+    .polaroid-container {
+        padding-top: 10px;
+        margin-bottom: 0.4rem;
+    }
+    
+    .polaroid-container::before {
+        width: 50px;
+        height: 14px;
+        left: calc(50% - 25px);
+    }
+    
+    .polaroid {
+        width: 120px;
+        padding: 6px;
+        padding-bottom: 12px;
+    }
+    
+    .polaroid-text {
+        font-size: 1.2rem;
+        margin-top: 4px;
+    }
+    
+    .message-intro {
+        font-size: 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+    
+    .counter-item .number {
+        font-size: 1rem;
+    }
+    
+    .gallery {
+        height: 140px;
+    }
+    
+    .gallery .polaroid {
+        width: 100px;
+        padding: 5px;
+        padding-bottom: 10px;
+    }
+    
+    .gallery .polaroid::before {
+        width: 40px;
+        height: 12px;
+        top: -6px;
+        left: calc(50% - 20px);
+    }
+    
+    .tilted-left {
+        transform: translate(-30px, -6px) rotate(-4deg);
+    }
+    
+    .tilted-right {
+        transform: translate(30px, 6px) rotate(4deg);
+    }
+    
+    .letter-box {
+        min-height: 120px;
+        max-height: 180px;
+        padding: 0.6rem;
+    }
+    
+    .letter-content {
+        font-size: 0.8rem;
+    }
+    
+    .cake-container {
+        height: 100px;
+        margin-bottom: 0.6rem;
+    }
+    
+    .cake {
+        transform: scale(0.7);
+        transform-origin: bottom center;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.8rem;
+        border-radius: 8px;
+    }
+}
+
+/* Tinggi Layar Sangat Pendek (Height <= 570px) */
+@media (max-height: 570px) {
+    .card {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .scrapbook-title {
+        font-size: 1.6rem;
+        margin-bottom: 0.2rem;
+    }
+    
+    .scrapbook-title.large {
+        font-size: 1.9rem;
+    }
+    
+    .subtitle {
+        display: none; /* Sembunyikan sub-judul untuk menghemat tempat */
+    }
+    
+    .polaroid {
+        width: 100px;
+        padding-bottom: 8px;
+    }
+    
+    .polaroid-text {
+        font-size: 1rem;
+        margin-top: 2px;
+    }
+    
+    .message-intro {
+        font-size: 0.75rem;
+        margin-bottom: 0.4rem;
+        line-height: 1.35;
+    }
+    
+    .counter-container {
+        padding: 4px;
+    }
+    
+    .counter-item .number {
+        font-size: 0.9rem;
+    }
+    
+    .counter-container h3 {
+        margin-bottom: 2px;
+        font-size: 0.7rem;
+    }
+    
+    .gallery {
+        height: 120px;
+    }
+    
+    .gallery .polaroid {
+        width: 85px;
+    }
+    
+    .tilted-left {
+        transform: translate(-22px, -4px) rotate(-4deg);
+    }
+    
+    .tilted-right {
+        transform: translate(22px, 4px) rotate(4deg);
+    }
+    
+    .letter-box {
+        min-height: 90px;
+        max-height: 130px;
+    }
+    
+    .cake-container {
+        height: 80px;
+    }
+    
+    .cake {
+        transform: scale(0.55);
+    }
+    
+    .btn-group {
+        margin-top: 0.6rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 0.9rem;
+        font-size: 0.75rem;
+    }
+}
