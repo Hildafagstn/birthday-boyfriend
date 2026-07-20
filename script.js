@@ -3,7 +3,7 @@
 // ==========================================================================
 const config = {
     // Tanggal Jadian / Pertama Kali Ketemu (Format: YYYY-MM-DD)
-    anniversaryDate: "2020-10-03", 
+    anniversaryDate: "2020-12-03", 
     
     // Nomor WhatsApp kamu (Gunakan format kode negara, misal 62812xxx)
     whatsappNumber: "6281234567890", 
@@ -236,16 +236,16 @@ function updateLoveCounter() {
     const now = new Date();
     
     const diffTime = Math.abs(now - startDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+    const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
     document.getElementById("days").textContent = String(diffDays).padStart(2, '0');
-    document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-    document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-    document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    document.getElementById("hours").textContent = String(diffHours).padStart(2, '0');
+    document.getElementById("minutes").textContent = String(diffMinutes).padStart(2, '0');
+    document.getElementById("seconds").textContent = String(diffSeconds).padStart(2, '0');
 }
 
 setInterval(updateLoveCounter, 1000);
