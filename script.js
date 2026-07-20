@@ -3,7 +3,7 @@
 // ==========================================================================
 const config = {
     // Tanggal Jadian / Pertama Kali Ketemu (Format: YYYY-MM-DD)
-    anniversaryDate: "2024-10-15", 
+    anniversaryDate: "2020-10-03", 
     
     // Nomor WhatsApp kamu (Gunakan format kode negara, misal 62812xxx)
     whatsappNumber: "6281234567890", 
